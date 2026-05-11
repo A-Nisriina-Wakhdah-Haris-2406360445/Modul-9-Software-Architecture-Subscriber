@@ -1,0 +1,12 @@
+<details>
+<Summary><b>Reflection</b></Summary>
+
+1. AMQP (Advanced Message Queuing Protocol) adalah sebuah protokol komunikasi yang digunakan untuk pertukaran pesan antara aplikasi atau layanan secara ascychronous. AMQP sering digunakan pada sistem microservices, distributed systems, message broker, dan event-driven architecture, salah satu contoh implemetasinya adalah pada Rabbit MQ. Komponen utamanya terdiri dari:
+- Producer: Aplikasi yang mengirim pesan
+- Exchange: Tempat pesan pertama kali masuk, digunakan untuk menentukan pesan dikirim ke queue yang mana
+- Queue: Temmpat menyimpan pesan secara temporary dan pesan akan tetap berada pada queue hingga pesan tersebut diambil oleh consumer atau dihapus
+- Consumer: Aplikasi yang menerima aatau merespons pesan
+Kelebihan AMQP adalah asynchronous (aplikasi tidak perlu menunggu respons langsung), loose coupling (service tidak saling bergantung secara langsung), dan reliable. Namun, kekurangannya adalah lebih kompleks dibandingkan HTTP, overhead besar, dan memerlukan broker tambahan.
+
+2. `guest:guest@localhost:5672` biasanya digunakan untuk koneksi ke broker AMQP seperti RabbitMQ. Format umumnya adalah `username:password@host:port`, dimana username merupakan merupakan bagian first guest, password merupakan second guest, @host merupakan alamat server, dan 5672 merupakan nomor port AMQP. Berdasarkan soal, pada `guest:guest@localhost:5672` yang menjadi fist guestnya adalah `guest` yang merupakan nama user untuk login ke RabbitMQ. Lalu, yang menjadi second guest adalah `guest` yang merupakan password dari user tersebut. Selain itu, `localhost` merupakan alamat server yang artinya server RabbitMQ berjalan di komputer sendiri dan tidak boleh remote dari komputer lain. Dan, `5672` merupakan nomor port tempat RabbitMQ menerima koneksi AMQP. Jadi, `guest:guest@localhost:5672` memiliki arti login ke Rabbit MQ lokal menggunakan username `guest` dan password `guest` melalui port nomor 5672.
+</details>

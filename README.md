@@ -1,3 +1,7 @@
+Nama: Nisriina Wakhdah Haris<br>
+NPM: 2406360445<br>
+Kelas: A<br>
+
 <details>
 <Summary><b>Reflection</b></Summary>
 
@@ -14,6 +18,7 @@ Kelebihan AMQP adalah asynchronous (aplikasi tidak perlu menunggu respons langsu
 ![Gambar RabbitMQ](/images/Screenshot%202026-05-12%20182941.png)
 Berdasarkan gambar tersebut, lonjakan garis merah hingga hampir menyentuh angka 6 saat menggunakan `thread::sleep(ten_millis);` terjadi karena adanya ketidakseimbangan antara kecepatan pengiriman dan kecepatan pemrosesan data. Meskipun pada kode memberikan jeda 10 milidetik menggunakan `thread::sleep`, publisher masih mengirimkan pesan dalam frekuensi yang sangat tinggi (sekitar 100 pesan per detik). Di sisi lain, subscriber membutuhkan waktu lebih lama untuk memproses satu pesan (misalnya melakukan I/O, menulis log, atau kalkulasi tertentu). Selisih waktu ini menyebabkan pesan mengantri di RabbitMQ. Selain itu,lonjakan garis merah tersebut menunjukkan bahwa ada sekitar 5 pesan yang sudah dikirim oleh publisher dan sedang berada di status Ready (siap diproses) di dalam antrian karena subscriber belum sempat mengambil atau menyelesaikan konfirmasi (acknowledgment) untuk pesan-pesan tersebut.
 
-### Reflection and Running at least three
+### Reflection and Running at least three subscribers
+![Gambar RabbitMQ](/images/Screenshot%202026-05-12%20192042.png)
 Berdasarkan gambar, berkurangnya lonjakan antrian secara lebih cepat terjadi karena meningkatkan kapasitas pemrosesan sistem melalui horizontal scaling. Pada bagian Global counts, jumlah Consumers kini menunjukkan angka 3, yang berarti ada tiga instance subscriber yang aktif secara bersamaan. Selain itu, jumlah Connections dan Channels juga meningkat menjadi 3, yang mengonfirmasi bahwa tiga terminal konsol tersebut terhubung ke RabbitMQ secara independen. Dengan adanya tiga konsol, RabbitMQ dapat mendistribusikan pesan dari antrian ke tiga pekerja yang berbeda secara bergantian. Meskipun publisher mengirimkan data dengan kecepatan yang sama, tidak bakal ada antrian yang muncul karena pesan langsung diproses oleh tiga konsumen sekaligus. Oleh karena itu, dengan Membuka tiga konsol dapat meningkatkan throughput sistem secara signifikan. Pesan tidak lagi mengantri lama karena kapasitas untuk memproses event secara bertahap telah terbagi ke tiga jalur pemrosesan yang berbeda.
 </details>
